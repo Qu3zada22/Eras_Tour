@@ -103,14 +103,25 @@ public class eras_tour {
         }
     }
 
-    private void displayTotalRevenue() {
+    private int calculateTotalRevenue() {
         int totalRevenue = 0;
+    
         for (Locality locality : localities) {
-            totalRevenue += locality.getSoldTickets() * locality.getPrice();
+            int soldTickets = locality.getSoldTickets();
+            int price = locality.getPrice();
+            totalRevenue += soldTickets * price;
         }
-        System.out.println("Total generado de dinero: $" + totalRevenue);
+    
+        return totalRevenue;
     }
-
+    private void displayTotalRevenue() {
+        int totalRevenue = calculateTotalRevenue();
+        System.out.println("Total generado de dinero: $" + formatCurrency(totalRevenue));
+    }
+    
+    private String formatCurrency(int amount) {
+        return String.format("%,.2f", (double) amount);
+    }
     private void useSpecialCode() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Ingrese el código especial: ");
