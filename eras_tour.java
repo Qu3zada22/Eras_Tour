@@ -14,7 +14,7 @@ public class eras_tour {
             System.out.println("5. Reporte de caja");
             System.out.println("6. Código Especial");
             System.out.println("7. Salir");
-            System.out.print("Seleccione una opción: ");
+            System.out.println("Seleccione una opción: ");
             int opcion = scanner.nextInt();
             scanner.nextLine();  // Consumir el salto de línea
 
