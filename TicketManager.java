@@ -14,35 +14,36 @@ public class TicketManager {
 
     public void nuevoComprador(String nombre, String email, int presupuesto) {
         compradorActivo = new Comprador(nombre, email, presupuesto);
+        System.out.println(compradorActivo);
     }
-
-    public void nuevaSolicitudBoletos(int cantidad) {
+    
+    public void nuevaSolicitud(int cantidad) {
+        System.out.println(compradorActivo);
+    
         if (compradorActivo != null) {
             int ticket = new Random().nextInt(15000) + 1;
             int a = new Random().nextInt(15000) + 1;
             int b = new Random().nextInt(15000) + 1;
-
-            for (Localidad localidad : localidades) {
-                if (localidad.validarEspacio() && localidad.validarDisponibilidad(cantidad) &&
-                        localidad.validarPrecio(compradorActivo.getPresupuesto())) {
-                    if (ticket >= Math.min(a, b) && ticket <= Math.max(a, b)) {
-                        compradorActivo.comprarBoletos(localidad, cantidad);
-                        System.out.println("¡Compra exitosa!");
-                        return;
-                    }
+    
+            int localidadAleatoria = new Random().nextInt(localidades.size());
+            Localidad localidad = localidades.get(localidadAleatoria);
+    
+            if (localidad.validarEspacio() && localidad.validarDisponibilidad(cantidad) && localidad.validarPrecio(compradorActivo.getPresupuesto())) {
+                if (ticket >= Math.min(a, b) && ticket <= Math.max(a, b)) {
+                    compradorActivo.comprarBoletos(localidad, cantidad);
+                    System.out.println("Compra exitosa");
+                    return;
                 }
             }
-            System.out.println("Compra fallida. No cumplió con los requisitos.");
+            System.out.println("No cumplió con los requisitos.");
         } else {
-            System.out.println("No hay comprador activo. Use la opción 1 para agregar un comprador.");
+            System.out.println("No hay comprador activo.");
         }
     }
 
     public void disponibilidadTotal() {
         for (Localidad localidad : localidades) {
-            System.out.println("Localidad " + localidad.getNumeroLocalidad() +
-                    ": Boletos vendidos: " + localidad.getBoletosVendidos() +
-                    ", Boletos disponibles: " + localidad.getEspacioDisponible());
+            System.out.println("Localidad " + localidad.getNumeroLocalidad() + ": Boletos vendidos: " + localidad.getBoletosVendidos() + ", Boletos disponibles: " + localidad.getEspacioDisponible());
         }
     }
 
@@ -73,7 +74,7 @@ public class TicketManager {
                         System.out.println("¡Compra especial exitosa!");
                         return;
                     } else {
-                        System.out.println("Compra especial fallida. No cumple con los requisitos.");
+                        System.out.println("Compra especial fallida.");
                         return;
                     }
                 }
