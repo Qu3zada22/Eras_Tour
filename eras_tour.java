@@ -1,14 +1,26 @@
 import java.util.Scanner;
 
+/**
+ * Esta clase representa un programa de gestión de venta de boletos para un tour.
+ */
 public class Eras_tour {
-    private TicketManager ticketManager = new TicketManager();
+    private TicketManager ticketManager = new TicketManager(); // Administrador de boletos
     private Scanner scanner = new Scanner(System.in);
+
+    /**
+     * Punto de entrada del programa.
+     *
+     * @param args Los argumentos de línea de comandos (no se utilizan en este caso).
+     */
     public static void main(String[] args) {
         Eras_tour eras_tour = new Eras_tour();
         eras_tour.mostrarMenu();
         eras_tour.scanner.close();
     }
 
+    /**
+     * Muestra el menú principal del programa y maneja las opciones seleccionadas por el usuario.
+     */
     public void mostrarMenu() {
         System.out.println("1. Nuevo comprador");
         System.out.println("2. Nueva solicitud de boletos");
