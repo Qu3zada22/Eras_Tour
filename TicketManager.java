@@ -38,7 +38,7 @@ public class TicketManager {
         }
     }
 
-    public void consultarDisponibilidadTotal() {
+    public void disponibilidadTotal() {
         for (Localidad localidad : localidades) {
             System.out.println("Localidad " + localidad.getNumeroLocalidad() +
                     ": Boletos vendidos: " + localidad.getBoletosVendidos() +
@@ -46,12 +46,10 @@ public class TicketManager {
         }
     }
 
-    public void consultarDisponibilidadIndividual(int numeroLocalidad) {
+    public void disponibilidadIndividual(int numeroLocalidad) {
         for (Localidad localidad : localidades) {
             if (localidad.getNumeroLocalidad() == numeroLocalidad) {
-                System.out.println("Localidad " + localidad.getNumeroLocalidad() +
-                        ": Boletos vendidos: " + localidad.getBoletosVendidos() +
-                        ", Boletos disponibles: " + localidad.getEspacioDisponible());
+                System.out.println("Localidad " + localidad.getNumeroLocalidad() + ": Boletos vendidos: " + localidad.getBoletosVendidos() + ", Boletos disponibles: " + localidad.getEspacioDisponible());
                 return;
             }
         }
@@ -67,33 +65,35 @@ public class TicketManager {
     }
 
     public void codigoEspecial(int codigo) {
-        int[] fibonacciSequence = generateFibonacciSequence();
-        for (int num : fibonacciSequence) {
-            if (codigo == num) {
-                for (Localidad localidad : localidades) {
-                    if (localidad.getNumeroLocalidad() == 10) {
-                        if (localidad.validarEspacio() && localidad.validarPrecio(20000)) {
-                            compradorActivo.comprarBoletos(localidad, 1);
-                            System.out.println("¡Compra especial exitosa!");
-                            return;
-                        } else {
-                            System.out.println("Compra especial fallida. No cumple con los requisitos.");
-                            return;
-                        }
+        if (esFibonacci(codigo)) {
+            for (Localidad localidad : localidades) {
+                if (localidad.getNumeroLocalidad() == 10) {
+                    if (localidad.validarEspacio() && localidad.validarPrecio(20000)) {
+                        compradorActivo.comprarBoletos(localidad, 1);
+                        System.out.println("¡Compra especial exitosa!");
+                        return;
+                    } else {
+                        System.out.println("Compra especial fallida. No cumple con los requisitos.");
+                        return;
                     }
                 }
             }
+        } else {
+            System.out.println("Código especial no válido.");
         }
-        System.out.println("Código especial no válido.");
     }
-
-    private int[] generateFibonacciSequence() {
-        int[] sequence = new int[20];
-        sequence[0] = 1;
-        sequence[1] = 1;
-        for (int i = 2; i < 20; i++) {
-            sequence[i] = sequence[i - 1] + sequence[i - 2];
+    
+    private boolean esFibonacci(int num) {
+        return secuenciaFibonacci(num, 0, 1);
+    }
+    
+    private boolean secuenciaFibonacci(int num, int a, int b) {
+        if (b == num) {
+            return true;
+        } else if (b > num) {
+            return false;
         }
-        return sequence;
+        return secuenciaFibonacci(num, b, a + b);
     }
+    
 }

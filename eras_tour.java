@@ -34,12 +34,12 @@ public class eras_tour {
                     ticketManager.nuevaSolicitudBoletos(cantidadBoletos);
                     break;
                 case 3:
-                    ticketManager.consultarDisponibilidadTotal();
+                    ticketManager.disponibilidadTotal();
                     break;
                 case 4:
                     System.out.print("Ingrese el número de localidad: ");
                     int numeroLocalidad = scanner.nextInt();
-                    ticketManager.consultarDisponibilidadIndividual(numeroLocalidad);
+                    ticketManager.disponibilidadIndividual(numeroLocalidad);
                     break;
                 case 5:
                     ticketManager.reporteCaja();
