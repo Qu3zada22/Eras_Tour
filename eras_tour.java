@@ -2,14 +2,14 @@ import java.util.Scanner;
 
 public class Eras_tour {
     private TicketManager ticketManager = new TicketManager();
+    private Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) {
         Eras_tour eras_tour = new Eras_tour();
         eras_tour.mostrarMenu();
+        eras_tour.scanner.close();
     }
 
     public void mostrarMenu() {
-        Scanner scanner = new Scanner(System.in);
-
         System.out.println("1. Nuevo comprador");
         System.out.println("2. Nueva solicitud de boletos");
         System.out.println("3. Consultar disponibilidad total");
